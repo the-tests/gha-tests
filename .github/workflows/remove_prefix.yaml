@@ -1,17 +1,14 @@
 name: 'Remove prefix from github ref_name'
 
-on:
-  workflow_call:
-    inputs:
-      pref:
-        required: true
-        type: string
-        description: 'Prefix to remove'
+inputs:
+  pref:
+    required: true
+    type: string
+    description: 'Prefix to remove'
 
-jobs:
-  remove-prefix-from-ref:
-    runs-on: ubuntu-latest
-
+runs:
+  using: composite
+  steps:
     steps:
       - name: Remove prefix
         shell: python

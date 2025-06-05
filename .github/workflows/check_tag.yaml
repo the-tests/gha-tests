@@ -10,15 +10,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Remove prefix
         id: remove_prefix
         uses: ./.github/workflows/remove_prefix.yaml
         with:
           pref: prefix-
-        secrets: inherit
 
       - name: Use new tag
         uses: ./.github/workflows/use_new_tag.yaml
         with:
           image_tag: steps.remove_prefix.outputs.image_tag
-        secrets: inherit
