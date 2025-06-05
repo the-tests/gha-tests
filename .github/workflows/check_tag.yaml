@@ -13,6 +13,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Print files
+        shell: bash
+        run: |
+          tree
+
       - name: Remove prefix
         id: remove_prefix
         uses: ./.github/workflows/remove_prefix.yaml
