@@ -1,0 +1,27 @@
+name: 'Use tag'
+
+on:
+  workflow_call:
+    inputs:
+      image_tag:
+        required: true
+        type: string
+        description: 'Image tag'
+
+jobs:
+  use_image_tag:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Use tag
+        shell: bash
+        run: |
+          printf '# Build summary\n' >> $GITHUB_STEP_SUMMARY
+          printf '## Tag that will be used is\n' >> $GITHUB_STEP_SUMMARY
+          printf '```\n' >> $GITHUB_STEP_SUMMARY
+          printf '%s\n' '${{ inputs.image_tag }}' >> $GITHUB_STEP_SUMMARY
+          printf '```\n' >> $GITHUB_STEP_SUMMARY
+          printf '## Same tag taken from env\n' >> $GITHUB_STEP_SUMMARY
+          printf '```\n' >> $GITHUB_STEP_SUMMARY
+          printf '%s\n' '${{ env.IMAGE_TAG }}' >> $GITHUB_STEP_SUMMARY
+          printf '```\n' >> $GITHUB_STEP_SUMMARY

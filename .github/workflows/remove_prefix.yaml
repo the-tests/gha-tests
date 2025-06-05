@@ -1,0 +1,34 @@
+name: 'Remove prefix from github ref_name'
+
+on:
+  workflow_call:
+    inputs:
+      pref:
+        required: true
+        type: string
+        description: 'Prefix to remove'
+
+jobs:
+  remove-prefix-from-ref:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Remove prefix
+        shell: python
+        run: |
+          from os import environ
+          from sys import exit
+          ref = '${{ github.ref_name }}'
+          pref = '${{ inputs.pref }}'
+          tag = ref.removeprefix(pref)
+          if tag == ref:
+            print(
+              f'::error::could not remove prefix {pref}. '
+              f'from github reference {ref}'
+            )
+          # To be able use IMAGE_TAG environment variable
+          with open(environ['GITHUB_ENV'], 'a') as f:
+            f.write('IMAGE_TAG=' + tag + '\n')
+          # To be able use image_tag output value
+          with open(environ['GITHUB_OUTPUT'], 'a') as f:
+            f.write('image_tag=' + tag + '\n')
