@@ -15,8 +15,10 @@ jobs:
         uses: ./.github/workflows/remove_prefix.yaml
         with:
           pref: prefix-
+        secrets: inherit
 
       - name: Use new tag
         uses: ./.github/workflows/use_new_tag.yaml
         with:
           image_tag: steps.remove_prefix.outputs.image_tag
+        secrets: inherit
