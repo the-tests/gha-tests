@@ -14,11 +14,11 @@ jobs:
 
       - name: Remove prefix
         id: remove_prefix
-        uses: the-tests/gha-tests/.github/workflows/remove_prefix.yaml@dev
+        uses: .github/actions/remove_prefix.yaml
         with:
           pref: prefix-
 
       - name: Use new tag
-        uses: the-tests/gha-tests/.github/workflows/use_new_tag.yaml@dev
+        uses: .github/actions/use_new_tag.yaml
         with:
           image_tag: steps.remove_prefix.outputs.image_tag
