@@ -17,7 +17,6 @@ jobs:
           pref: prefix-
 
       - name: Use new tag
-        id: remove_prefix
         uses: ./.github/workflows/use_new_tag.yaml
         with:
           image_tag: steps.remove_prefix.outputs.image_tag
