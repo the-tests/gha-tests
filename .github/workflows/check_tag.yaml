@@ -12,11 +12,11 @@ jobs:
     steps:
       - name: Remove prefix
         id: remove_prefix
-        uses: .github/actions/remove_prefix.yaml
+        uses: ./.github/actions/remove_prefix
         with:
           pref: prefix-
 
       - name: Use new tag
-        uses: .github/actions/use_new_tag.yaml
+        uses: ./.github/actions/use_new_tag
         with:
           image_tag: steps.remove_prefix.outputs.image_tag
