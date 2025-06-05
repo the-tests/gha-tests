@@ -1,4 +1,4 @@
-name: 'Test removeing of prefix'
+name: 'Test removing of prefix'
 
 on:
   push:
@@ -7,14 +7,17 @@ on:
 
 jobs:
   remove-prefix-and-use-it:
-    - name: Remove prefix
-      id: remove_prefix
-      uses: ./.github/workflows/remove_prefix.yaml
-      with:
-        pref: prefix-
+    runs-on: ubuntu-latest
 
-    - name: Use new tag
-      id: remove_prefix
-      uses: ./.github/workflows/use_new_tag.yaml
-      with:
-        image_tag: steps.remove_prefix.outputs.image_tag
+    steps:
+      - name: Remove prefix
+        id: remove_prefix
+        uses: ./.github/workflows/remove_prefix.yaml
+        with:
+          pref: prefix-
+
+      - name: Use new tag
+        id: remove_prefix
+        uses: ./.github/workflows/use_new_tag.yaml
+        with:
+          image_tag: steps.remove_prefix.outputs.image_tag
