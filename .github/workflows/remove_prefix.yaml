@@ -6,11 +6,17 @@ inputs:
     type: string
     description: 'Prefix to remove'
 
+outputs:
+  image_tag:
+    description: "Tag without a prefix"
+    value: ${{ steps.prefix_remover.outputs.image_tag }}
+
 runs:
   using: composite
   steps:
     steps:
       - name: Remove prefix
+        id: prefix_remover
         shell: python
         run: |
           from os import environ
