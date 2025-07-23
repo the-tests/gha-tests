@@ -18,7 +18,9 @@ runs:
       shell: bash
       run: |
         printf '# GitHub context\n' >> $GITHUB_STEP_SUMMARY
+        printf '```\n' >> $GITHUB_STEP_SUMMARY
         printf '${{ toJSON(github) }}' | jq >> $GITHUB_STEP_SUMMARY
+        printf '\n```' >> $GITHUB_STEP_SUMMARY
     - name: Remove prefix
       id: prefix_remover
       shell: python
