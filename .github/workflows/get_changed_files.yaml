@@ -1,0 +1,37 @@
+name: "Get files"
+
+on:
+  pull_request:
+    branches:
+      - dev
+
+jobs:
+  get_files:
+    runs-on: ubuntu-latest
+    name: "Get files"
+    outputs:
+      files: ${{ steps.files.outputs.all }}
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: get files
+        id: files
+        uses: jitterbit/get-changed-files@v1
+        with:
+          format: 'json'
+
+  print_each_file:
+    runs-on: ubuntu-latest
+    name: "Print files"
+    needs: get_files
+    strategy:
+      matrix:
+        file: ${{ fromJSON(needs.get_files.outputs.files) }}
+    steps:
+      - name: print ${{ matrix.file }}
+        run: |
+          printf '\n```\n' >> $GITHUB_STEP_SUMMARY
+          printf '${{ matrix.file }}' >> $GITHUB_STEP_SUMMARY
+          printf '\n```\n' >> $GITHUB_STEP_SUMMARY
