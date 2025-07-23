@@ -1,4 +1,4 @@
-name: "Lint and Format"
+name: "Get files"
 
 on:
   pull_request:
@@ -14,7 +14,9 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
-      - name: Get changes
-        shell: bash
+      - name: Modified files
         run: |
-          echo "$(git diff --name-only HEAD^1 HEAD)" >> $GITHUB_STEP_SUMMARY
+          firstCommit='${{ github.event.base_ref }}'
+          lastCommit='${{ github.event.head_ref }}'
+          changedFiles=$(git diff --name-only --diff-filter=d "${firstCommit}~1" "${lastCommit}")
+          echo "${changedFiles}" >> $GITHUB_STEP_SUMMARY
