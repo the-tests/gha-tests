@@ -16,7 +16,4 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
       - name: Modified files
         run: |
-          firstCommit='${{ github.event.base_ref }}'
-          lastCommit='${{ github.event.head_ref }}'
-          changedFiles=$(git diff --name-only --diff-filter=d "${firstCommit}~1" "${lastCommit}")
-          echo "${changedFiles}" >> $GITHUB_STEP_SUMMARY
+          echo "${{ toJSON(github) }}" >> $GITHUB_STEP_SUMMARY
