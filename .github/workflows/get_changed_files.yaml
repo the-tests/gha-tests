@@ -15,7 +15,7 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
       - name: get files
-      - id: files
+        id: files
         uses: jitterbit/get-changed-files@v1
         with:
           format: 'json'
