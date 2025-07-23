@@ -28,7 +28,7 @@ jobs:
     needs: get_files
     strategy:
       matrix:
-        file: ${{ needs.get_files.outputs.files }}
+        file: ${{ fromJSON(needs.get_files.outputs.files) }}
     steps:
       - name: print ${{ matrix.file }}
         run: |
