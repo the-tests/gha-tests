@@ -19,8 +19,16 @@ jobs:
         uses: jitterbit/get-changed-files@v1
         with:
           format: 'json'
-      - name: print files
+
+  print_each_file:
+    runs-on: ubuntu-latest
+    name: "GET FILES"
+    strategy:
+    matrix:
+      service: ${{ needs.get_files.steps.files.outputs.all }}
+    steps:
+      - name: print ${{ matrix.service }}
         run: |
-          printf '```\n' >> $GITHUB_STEP_SUMMARY
+          printf '\n```\n' >> $GITHUB_STEP_SUMMARY
           printf '${{ steps.files.outputs.all }}' | jq  >> $GITHUB_STEP_SUMMARY
-          printf '\n```' >> $GITHUB_STEP_SUMMARY
+          printf '\n```\n' >> $GITHUB_STEP_SUMMARY
