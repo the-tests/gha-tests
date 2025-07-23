@@ -33,5 +33,5 @@ jobs:
       - name: print ${{ matrix.file }}
         run: |
           printf '\n```\n' >> $GITHUB_STEP_SUMMARY
-          printf '${{ matrix.file }}' | jq  >> $GITHUB_STEP_SUMMARY
+          printf '${{ matrix.file }}' >> $GITHUB_STEP_SUMMARY
           printf '\n```\n' >> $GITHUB_STEP_SUMMARY
