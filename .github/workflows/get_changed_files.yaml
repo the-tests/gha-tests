@@ -8,7 +8,7 @@ on:
 jobs:
   get_files:
     runs-on: ubuntu-latest
-    name: "GET FILES"
+    name: "Get files"
     steps:
       - name: checkout
         uses: actions/checkout@v4
@@ -22,10 +22,10 @@ jobs:
 
   print_each_file:
     runs-on: ubuntu-latest
-    name: "GET FILES"
+    name: "Print files"
     strategy:
-    matrix:
-      service: ${{ needs.get_files.steps.files.outputs.all }}
+      matrix:
+        service: ${{ needs.get_files.steps.files.outputs.all }}
     steps:
       - name: print ${{ matrix.service }}
         run: |
