@@ -25,6 +25,7 @@ jobs:
   print_each_file:
     runs-on: ubuntu-latest
     name: "Print files"
+    needs: get_files
     strategy:
       matrix:
         file: ${{ needs.get_files.outputs.files }}
